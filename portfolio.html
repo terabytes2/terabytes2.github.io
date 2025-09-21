@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Your Name | Portfolio</title>
+    <style>
+        /* Reset */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            color: #cc5600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover,
+        a:focus {
+            color: #b37400;
+            outline: none;
+        }
+
+        /* Navigation */
+        nav {
+            background: #181818;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        nav .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #cc5600;
+            letter-spacing: 2px;
+            user-select: none;
+            text-shadow: 0 0 4px #cc5600;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        nav ul li a {
+            padding: 6px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: #cc5600;
+            color: #181818;
+            box-shadow: 0 0 8px #cc560088;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 100px auto 60px;
+            /* margin-top to avoid nav overlap */
+            padding: 0 20px;
+            flex-grow: 1;
+        }
+
+        /* Header / Home Section */
+        #home {
+            text-align: center;
+            padding: 60px 20px 80px;
+        }
+
+        #home h1 {
+            font-size: 3.8rem;
+            color: #cc5600;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 6px #cc5600;
+        }
+
+        #home p {
+            font-size: 1.3rem;
+            color: #e0a74d;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .profile-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #cc5600;
+            box-shadow: 0 0 10px #cc5600;
+            margin: 0 auto;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 18px #b37400;
+        }
+
+        /* Section Titles */
+        section h2 {
+            font-size: 2.8rem;
+            color: #cc5600;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #cc5600;
+            padding-bottom: 8px;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 6px #cc5600;
+            max-width: max-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        #about p {
+            font-size: 1.2rem;
+            color: #e0c097;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        /* Work Experience Section */
+        #work-experience {
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .job {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 10px #cc560044;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: default;
+        }
+
+        .job:hover {
+            background-color: #cc560011;
+            box-shadow: 0 0 18px #b37400;
+        }
+
+        .job h3 {
+            color: #cc5600;
+            margin-bottom: 6px;
+            font-size: 1.4rem;
+        }
+
+        .job .company {
+            font-weight: 600;
+            color: #e0a74d;
+            margin-bottom: 6px;
+        }
+
+        .job .dates {
+            font-size: 0.9rem;
+            color: #8a5a00;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .job p {
+            font-size: 1.05rem;
+            color: #e0c097;
+            line-height: 1.5;
+        }
+
+        /* Specialties Section */
+        #specialties {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .specialty {
+            background: #1e1e1e;
+            border-radius: 15px;
+            width: 140px;
+            height: 140px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #cc5600;
+            font-weight: 700;
+            font-size: 1.3rem;
+            box-shadow: 0 0 8px #cc560044;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            user-select: none;
+        }
+
+        .specialty::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, #b37400, #cc5600, #b37400, #cc5600);
+            background-size: 400% 400%;
+            filter: blur(8px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            animation: glowing 20s linear infinite;
+            z-index: 0;
+            border-radius: 15px;
+        }
+
+        .specialty:hover::before {
+            opacity: 1;
+        }
+
+        .specialty span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .specialty:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 18px #b37400;
+        }
+
+        @keyframes glowing {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Projects Section */
+        #projects ul {
+            list-style: none;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        #projects li {
+            background: #1e1e1e;
+            margin-bottom: 20px;
+            padding: 20px 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px #cc560044;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: default;
+            font-size: 1.1rem;
+        }
+
+        #projects li:hover {
+            background-color: #cc560011;
+            box-shadow: 0 0 18px #b37400;
+        }
+
+        /* Contact Section */
+        #contact {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        #contact p {
+            font-size: 1.15rem;
+            margin-bottom: 15px;
+            color: #e0c097;
+        }
+
+        #contact a {
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #444;
+            background-color: #111;
+            box-shadow: inset 0 1px 2px #000;
+            user-select: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            nav ul {
+                gap: 15px;
+            }
+
+            #home h1 {
+                font-size: 2.8rem;
+            }
+
+            .profile-pic {
+                width: 140px;
+                height: 140px;
+            }
+
+            .specialty {
+                width: 120px;
+                height: 120px;
+                font-size: 1.1rem;
+            }
+
+            #projects li,
+            .job {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            nav .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="container">
+            <div class="logo">YourName</div>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#work-experience">Work Experience</a></li>
+                <li><a href="#specialties">Specialties</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="home" tabindex="-1">
+            <h1>Your Name</h1>
+            <p>Full-Stack Developer & Programmer</p>
+            <!-- Replace 'your-photo.jpg' with your own picture -->
+            <img src="this.jpg" alt="Profile" class="profile-pic" />
+        </section>
+
+        <section id="about" tabindex="-1">
+            <h2>About Me</h2>
+            <p>
+                I am a passionate developer with expertise in building modern, responsive, and interactive web
+                applications.
+                I enjoy solving complex problems and continuously improving my skills.
+            </p>
+        </section>
+
+        <section id="work-experience" tabindex="-1">
+            <h2>Work Experience</h2>
+
+            <div class="job">
+                <h3>Senior Software Engineer</h3>
+                <div class="company">Tech Solutions Inc.</div>
+                <div class="dates">Jan 2021 – Present</div>
+                <p>
+                    Leading a team of developers to build scalable web applications using React, Node.js, and cloud
+                    technologies.
+                    Responsible for architecture design, code reviews, and mentoring junior developers.
+                </p>
+            </div>
+
+            <div class="job">
+                <h3>Frontend Developer</h3>
+                <div class="company">Creative Web Agency</div>
+                <div class="dates">Jun 2018 – Dec 2020</div>
+                <p>
+                    Developed responsive and accessible websites for clients using HTML5, CSS3, JavaScript, and Vue.js.
+                    Collaborated closely with designers to implement pixel-perfect UI.
+                </p>
+            </div>
+
+            <div class="job">
+                <h3>Junior Developer</h3>
+                <div class="company">Startup Hub</div>
+                <div class="dates">Jan 2017 – May 2018</div>
+                <p>
+                    Assisted in developing backend APIs and frontend features using Java and Angular.
+                    Gained experience in agile workflows and version control.
+                </p>
+            </div>
+        </section>
+
+        <section id="specialties" tabindex="-1">
+            <h2>My Specialties</h2>
+            <div class="specialty" title="HyperText Markup Language">
+                <span>HTML</span>
+            </div>
+            <div class="specialty" title="Cascading Style Sheets">
+                <span>CSS</span>
+            </div>
+            <div class="specialty" title="Java Programming Language">
+                <span>Java</span>
+            </div>
+            <div class="specialty" title="JavaScript Programming Language">
+                <span>JavaScript</span>
+            </div>
+            <div class="specialty" title="Python Programming Language">
+                <span>Python</span>
+            </div>
+            <div class="specialty" title="SQL Databases">
+                <span>SQL</span>
+            </div>
+        </section>
+
+        <section id="projects" tabindex="-1">
+            <h2>Projects</h2>
+            <ul>
+                <li><strong>Portfolio Website:</strong> A dark-themed responsive portfolio with animations and
+                    interactive features.</li>
+                <li><strong>Java Game:</strong> Developed a 2D platformer game using Java and JavaFX.</li>
+                <li><strong>CSS Animation Demo:</strong> Created various CSS animations to enhance user experience.</li>
+            </ul>
+        </section>
+
+        <section id="contact" tabindex="-1">
+            <h2>Contact Me</h2>
+            <p>Email: <a href="mailto:qhumphrey39@gmail.com">qhumphrey39@gmail.com</a></p>
+            <p>Phone: +233 50 892 0053</p>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2024 Your Name. All rights reserved.
+    </footer>
+
+    <script>
+        // Highlight active nav link on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav ul li a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 90;
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
